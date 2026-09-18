@@ -31,7 +31,7 @@ npx skills add QYDION/ai-image-generator --skill image-generator
 
 **Option 3: manual**
 
-Copy the entire `skills/image-generator` folder into your client's skills directory (`~/.claude/skills/`, `~/.workbuddy/skills/`, and so on).
+Copy the entire `skills/image-generator` folder into your client's skills directory (for example `~/.claude/skills/`).
 
 ## Repository layout
 

@@ -33,7 +33,7 @@ An unspecified count defaults to 1 image; aspect ratio defaults to 1:1; image qu
 
 ## Installation
 
-Drop the `image-generator` folder into your client's skills directory — either `~/.workbuddy/skills/` or `~/.claude/skills/` works — and restart once.
+Drop the `image-generator` folder into your client's skills directory (for example `~/.claude/skills/`) and restart once.
 
 The skill itself is a single Markdown file: no scripts, no external dependencies, no machine-specific paths, and no binding to any image-generation provider. The generation channel is configured by the user. (The `brand/` folder holds only the company logo used by this document; the skill never reads it at runtime.)
 
