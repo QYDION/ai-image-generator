@@ -16,8 +16,6 @@ Full details: [`skills/image-generator/README.en.md`](skills/image-generator/REA
 
 ## Installation
 
-This is a **universal** Agent Skill with no client binding. It installs and runs on any common agent that follows the Agent Skills spec — Claude Code, Codex, Cursor, OpenCode, Gemini CLI, GitHub Copilot, Windsurf, Cline, Trae, Qoder and 80+ other clients.
-
 **Option 1: skills CLI**
 
 ```bash

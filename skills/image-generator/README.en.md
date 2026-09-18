@@ -33,8 +33,6 @@ An unspecified count defaults to 1 image; aspect ratio defaults to 1:1; image qu
 
 ## Installation
 
-A **universal** Agent Skill with no client binding; it runs on any common agent (Claude Code, Codex, Cursor, OpenCode, Gemini CLI, GitHub Copilot, Windsurf, Cline, Trae, Qoder and 80+ others).
-
 **Option 1: skills CLI**
 
 ```bash

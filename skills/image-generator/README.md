@@ -33,8 +33,6 @@ v1.0.0 · MIT License · 盘锦奇点科技有限公司
 
 ## 安装
 
-本技能是**通用型** Agent Skill，不绑定任何客户端，常见 Agent 都能直接使用（Claude Code、Codex、Cursor、OpenCode、Gemini CLI、GitHub Copilot、Windsurf、Cline、Trae、Qoder 等 80 余款）。
-
 **方式一：skills CLI**
 
 ```bash

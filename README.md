@@ -16,8 +16,6 @@
 
 ## 安装
 
-本技能是**通用型** Agent Skill，不绑定任何客户端。凡支持 Agent Skills 规范的常见 Agent 都能直接安装使用，包括 Claude Code、Codex、Cursor、OpenCode、Gemini CLI、GitHub Copilot、Windsurf、Cline、Trae、Qoder 等 80 余款客户端。
-
 **方式一：skills CLI**
 
 ```bash
