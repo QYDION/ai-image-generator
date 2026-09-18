@@ -1,0 +1,16 @@
+{
+  "name": "ai-image-generator",
+  "owner": {
+    "name": "盘锦奇点科技有限公司 (Panjin QYDION Technology Co., Ltd.)"
+  },
+  "description": "Open-source Agent Skills by Panjin QYDION Technology Co., Ltd.",
+  "plugins": [
+    {
+      "name": "image-generator",
+      "source": "./",
+      "skills": ["./skills/image-generator"],
+      "description": "Turns a brief description into a professional-grade image-generation prompt and drives generation. Supports series illustrations, reference-based second-pass generation, and consistent or blended styles.",
+      "version": "1.0.0"
+    }
+  ]
+}
