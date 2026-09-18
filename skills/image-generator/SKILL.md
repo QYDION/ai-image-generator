@@ -4,7 +4,6 @@ description: Generates a batch of stylistically consistent, professional-grade i
 version: 1.0.0
 license: MIT
 author: 盘锦奇点科技有限公司 (Panjin QYDION Technology Co., Ltd.)
-agent_created: true
 ---
 
 # Image Generator

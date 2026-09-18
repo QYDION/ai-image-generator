@@ -4,7 +4,6 @@ description: 根据文档、图片或文字描述，批量生成一组风格统�
 version: 1.0.0
 license: MIT
 author: 盘锦奇点科技有限公司
-agent_created: true
 ---
 
 # 图片生成器
