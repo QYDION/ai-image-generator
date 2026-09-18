@@ -4,15 +4,13 @@
 
 > [中文](README.md) | English
 
-An open-source Agent Skill from Panjin QYDION Technology Co., Ltd.: expands a brief request into a professional image-generation prompt you can submit as-is, then drives generation image by image.
-
 ## Included skill
 
 | Skill | Description |
 |---|---|
 | `image-generator` | Turns a user's brief description into a professional-grade image-generation prompt and drives the generation. Supports series illustrations, document-to-image, reference-based second-pass generation, outfit and background changes, and consistent or blended styles. |
 
-Full details: [`skills/image-generator/README.en.md`](skills/image-generator/README.en.md).
+The skill itself: [`skills/image-generator/SKILL.md`](skills/image-generator/SKILL.md).
 
 ## Installation
 
@@ -33,14 +31,11 @@ Either way, just describe what you want in natural language afterwards — no sp
 ```
 .
 ├── LICENSE
-├── README.md                     Chinese documentation
-├── README.en.md                  This file
+├── README.md
+├── README.en.md
 └── skills/
     └── image-generator/
-        ├── SKILL.md              The skill itself (the only required file)
-        ├── README.md             Chinese usage guide
-        ├── README.en.md          This usage guide
-        └── LICENSE
+        └── SKILL.md
 ```
 
 ## Dependencies
