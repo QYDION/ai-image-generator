@@ -1,4 +1,4 @@
-<img src="brand/qydion-logo.svg" alt="QYDION" width="240">
+<a href="https://www.qydion.com"><img src="brand/qydion-logo.svg" alt="QYDION" width="240"></a>
 
 # Image Generator
 
@@ -46,5 +46,3 @@ By default no evaluative quality terms such as `8k` or `masterpiece` are written
 ## License
 
 MIT License · Copyright (c) 2026 盘锦奇点科技有限公司 (Panjin QYDION Technology Co., Ltd.)
-
-Website: <https://www.qydion.com>

@@ -1,4 +1,4 @@
-<img src="skills/image-generator/brand/qydion-logo.svg" alt="QYDION" width="240">
+<a href="https://www.qydion.com"><img src="skills/image-generator/brand/qydion-logo.svg" alt="QYDION" width="240"></a>
 
 # ai-image-generator
 
@@ -58,4 +58,4 @@ npx skills add QYDION/ai-image-generator --skill image-generator
 
 ## 许可
 
-[MIT](LICENSE) · 官网：<https://www.qydion.com>
+[MIT](LICENSE)
