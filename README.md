@@ -16,36 +16,22 @@
 
 ## 安装
 
-**方式一：skills CLI**（支持 Claude Code、Codex、Cursor 等 70+ 客户端）
-
 ```bash
 npx skills add QYDION/ai-image-generator --skill image-generator
 ```
 
-**方式二：Claude Code 插件市场**
-
-```
-/plugin marketplace add QYDION/ai-image-generator
-/plugin install image-generator@ai-image-generator
-```
-
-**方式三：手动**
-
-把 `skills/image-generator` 整个文件夹复制到所用客户端的技能目录（如 `~/.claude/skills/`）。
+装到所用客户端的技能目录，重开一次即可生效。
 
 ## 目录结构
 
 ```
 .
-├── .claude-plugin/
-│   └── marketplace.json          Claude Code 插件市场清单
 ├── LICENSE
 ├── README.md                     本文件（中文）
 ├── README.en.md                  英文版说明
 └── skills/
     └── image-generator/
-        ├── SKILL.md              技能本体（英文，唯一必需文件）
-        ├── SKILL.zh-CN.md        技能本体中文版
+        ├── SKILL.md              技能本体（唯一必需文件）
         ├── README.md             使用说明（中文）
         ├── README.en.md          使用说明英文版
         └── LICENSE

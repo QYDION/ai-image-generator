@@ -33,7 +33,9 @@ v1.0.0 · MIT License · 盘锦奇点科技有限公司
 
 ## 安装
 
-把 `image-generator` 文件夹放进客户端的技能目录（如 `~/.claude/skills/`），重开一次就能用。
+```bash
+npx skills add QYDION/ai-image-generator --skill image-generator
+```
 
 技能本身是一个 Markdown 文件，无脚本、无外部依赖、不含机器相关路径，不与任何生图服务商绑定。生图通道由使用者自行配置。
 

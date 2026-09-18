@@ -16,36 +16,22 @@ Full details: [`skills/image-generator/README.en.md`](skills/image-generator/REA
 
 ## Installation
 
-**Option 1: skills CLI** (works with Claude Code, Codex, Cursor and 70+ other clients)
-
 ```bash
 npx skills add QYDION/ai-image-generator --skill image-generator
 ```
 
-**Option 2: Claude Code plugin marketplace**
-
-```
-/plugin marketplace add QYDION/ai-image-generator
-/plugin install image-generator@ai-image-generator
-```
-
-**Option 3: manual**
-
-Copy the entire `skills/image-generator` folder into your client's skills directory (for example `~/.claude/skills/`).
+Installs into your client's skills directory; restart once to activate.
 
 ## Repository layout
 
 ```
 .
-├── .claude-plugin/
-│   └── marketplace.json          Claude Code marketplace manifest
 ├── LICENSE
 ├── README.md                     Chinese documentation
 ├── README.en.md                  This file
 └── skills/
     └── image-generator/
-        ├── SKILL.md              The skill itself (English; the only required file)
-        ├── SKILL.zh-CN.md        Chinese version of the skill
+        ├── SKILL.md              The skill itself (the only required file)
         ├── README.md             Chinese usage guide
         ├── README.en.md          This usage guide
         └── LICENSE

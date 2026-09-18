@@ -8,8 +8,6 @@ author: 盘锦奇点科技有限公司 (Panjin QYDION Technology Co., Ltd.)
 
 # Image Generator
 
-> [中文](SKILL.zh-CN.md) | English
-
 **Core responsibility: turn the user's brief description into a professional-grade image-generation prompt, and drive the generation.**
 
 Users typically supply only a sentence or a few lines. This skill expands that into one paragraph of professional prompt ready to submit, then generates the images one by one against a manifest. It covers both generation from scratch and reference-based second-pass generation (image-to-image).

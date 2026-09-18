@@ -33,7 +33,9 @@ An unspecified count defaults to 1 image; aspect ratio defaults to 1:1; image qu
 
 ## Installation
 
-Drop the `image-generator` folder into your client's skills directory (for example `~/.claude/skills/`) and restart once.
+```bash
+npx skills add QYDION/ai-image-generator --skill image-generator
+```
 
 The skill itself is a single Markdown file: no scripts, no external dependencies, no machine-specific paths, and no binding to any image-generation provider. The generation channel is configured by the user.
 
