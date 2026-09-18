@@ -1,4 +1,4 @@
-<a href="https://www.qydion.com"><img src="brand/qydion-logo.svg" alt="QYDION" width="240"></a>
+<a href="https://www.qydion.com"><img src="https://qydion.com/brand/16-horizontal-full-deepspace.png" alt="QYDION" width="240"></a>
 
 # 图片生成器 image-generator
 
@@ -35,7 +35,7 @@ v1.0.0 · MIT License · 盘锦奇点科技有限公司
 
 把 `image-generator` 文件夹放进客户端的技能目录（如 `~/.claude/skills/`），重开一次就能用。
 
-技能本身是一个 Markdown 文件，无脚本、无外部依赖、不含机器相关路径，不与任何生图服务商绑定。生图通道由使用者自行配置。（`brand/` 目录只存本文档展示用的公司 logo，技能运行时不读取。）
+技能本身是一个 Markdown 文件，无脚本、无外部依赖、不含机器相关路径，不与任何生图服务商绑定。生图通道由使用者自行配置。
 
 ## 兼容性
 

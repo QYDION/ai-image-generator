@@ -1,4 +1,4 @@
-<a href="https://www.qydion.com"><img src="skills/image-generator/brand/qydion-logo.svg" alt="QYDION" width="240"></a>
+<a href="https://www.qydion.com"><img src="https://qydion.com/brand/16-horizontal-full-deepspace.png" alt="QYDION" width="240"></a>
 
 # ai-image-generator
 
@@ -48,7 +48,6 @@ Copy the entire `skills/image-generator` folder into your client's skills direct
         ├── SKILL.zh-CN.md        Chinese version of the skill
         ├── README.md             Chinese usage guide
         ├── README.en.md          This usage guide
-        ├── brand/                Company logo used by the documentation
         └── LICENSE
 ```
 

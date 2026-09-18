@@ -1,4 +1,4 @@
-<a href="https://www.qydion.com"><img src="skills/image-generator/brand/qydion-logo.svg" alt="QYDION" width="240"></a>
+<a href="https://www.qydion.com"><img src="https://qydion.com/brand/16-horizontal-full-deepspace.png" alt="QYDION" width="240"></a>
 
 # ai-image-generator
 
@@ -48,7 +48,6 @@ npx skills add QYDION/ai-image-generator --skill image-generator
         ├── SKILL.zh-CN.md        技能本体中文版
         ├── README.md             使用说明（中文）
         ├── README.en.md          使用说明英文版
-        ├── brand/                文档展示用公司 logo
         └── LICENSE
 ```
 

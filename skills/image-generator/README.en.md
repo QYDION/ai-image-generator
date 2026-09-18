@@ -1,4 +1,4 @@
-<a href="https://www.qydion.com"><img src="brand/qydion-logo.svg" alt="QYDION" width="240"></a>
+<a href="https://www.qydion.com"><img src="https://qydion.com/brand/16-horizontal-full-deepspace.png" alt="QYDION" width="240"></a>
 
 # Image Generator
 
@@ -35,7 +35,7 @@ An unspecified count defaults to 1 image; aspect ratio defaults to 1:1; image qu
 
 Drop the `image-generator` folder into your client's skills directory (for example `~/.claude/skills/`) and restart once.
 
-The skill itself is a single Markdown file: no scripts, no external dependencies, no machine-specific paths, and no binding to any image-generation provider. The generation channel is configured by the user. (The `brand/` folder holds only the company logo used by this document; the skill never reads it at runtime.)
+The skill itself is a single Markdown file: no scripts, no external dependencies, no machine-specific paths, and no binding to any image-generation provider. The generation channel is configured by the user.
 
 ## Compatibility
 
