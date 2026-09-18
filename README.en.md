@@ -16,11 +16,13 @@ Full details: [`skills/image-generator/README.en.md`](skills/image-generator/REA
 
 ## Installation
 
+This is a **universal** Agent Skill with no client binding. It installs and runs on any common agent that follows the Agent Skills spec — Claude Code, Codex, Cursor, OpenCode, Gemini CLI, GitHub Copilot, Windsurf, Cline, Trae, Qoder and 80+ other clients.
+
 ```bash
 npx skills add QYDION/ai-image-generator --skill image-generator
 ```
 
-Installs into your client's skills directory; restart once to activate.
+Installs into your client's skills directory; restart once to activate. After that, just describe what you want in natural language — no special commands and no client-specific invocation format.
 
 ## Repository layout
 
