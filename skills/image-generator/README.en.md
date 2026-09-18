@@ -35,11 +35,17 @@ An unspecified count defaults to 1 image; aspect ratio defaults to 1:1; image qu
 
 A **universal** Agent Skill with no client binding; it runs on any common agent (Claude Code, Codex, Cursor, OpenCode, Gemini CLI, GitHub Copilot, Windsurf, Cline, Trae, Qoder and 80+ others).
 
+**Option 1: skills CLI**
+
 ```bash
 npx skills add QYDION/ai-image-generator --skill image-generator
 ```
 
-Once installed, just describe what you want in natural language — no special commands.
+**Option 2: manual**
+
+Download this repository and copy the entire `skills/image-generator` folder into your client's skills directory (the location differs per client — check that client's documentation), then restart once.
+
+Either way, just describe what you want in natural language afterwards — no special commands.
 
 The skill itself is a single Markdown file: no scripts, no external dependencies, no machine-specific paths, and no binding to any image-generation provider. The generation channel is configured by the user.
 

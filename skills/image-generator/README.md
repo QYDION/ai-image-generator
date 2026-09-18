@@ -35,11 +35,17 @@ v1.0.0 · MIT License · 盘锦奇点科技有限公司
 
 本技能是**通用型** Agent Skill，不绑定任何客户端，常见 Agent 都能直接使用（Claude Code、Codex、Cursor、OpenCode、Gemini CLI、GitHub Copilot、Windsurf、Cline、Trae、Qoder 等 80 余款）。
 
+**方式一：skills CLI**
+
 ```bash
 npx skills add QYDION/ai-image-generator --skill image-generator
 ```
 
-装好后在对话里直接用自然语言提需求即可，无需特殊指令。
+**方式二：手动**
+
+下载本仓库，把 `skills/image-generator` 整个文件夹复制到所用客户端的技能目录（各客户端的技能目录位置不同，以该客户端文档为准），重开一次生效。
+
+两种方式装好后，在对话里直接用自然语言提需求即可，无需特殊指令。
 
 技能本身是一个 Markdown 文件，无脚本、无外部依赖、不含机器相关路径，不与任何生图服务商绑定。生图通道由使用者自行配置。
 
