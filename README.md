@@ -1,4 +1,4 @@
-<a href="https://www.qydion.com"><img src="https://qydion.com/brand/16-horizontal-full-deepspace.png" alt="QYDION" width="240"></a>
+<a href="https://www.qydion.com" target="_blank" rel="noopener"><img src="https://qydion.com/brand/16-horizontal-full-deepspace.png" alt="QYDION" width="240"></a>
 
 # ai-image-generator
 
@@ -9,8 +9,6 @@
 | 技能 | 说明 |
 |---|---|
 | `image-generator`（图片生成器） | 把用户的简单描述转成专业级生图提示词并驱动生成。支持系列配图、文档转图、参考图二次生成、换装换背景、画风统一与混合画风。 |
-
-技能本体见 [`skills/image-generator/SKILL.md`](skills/image-generator/SKILL.md)。
 
 ## 安装
 

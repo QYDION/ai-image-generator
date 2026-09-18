@@ -1,4 +1,4 @@
-<a href="https://www.qydion.com"><img src="https://qydion.com/brand/16-horizontal-full-deepspace.png" alt="QYDION" width="240"></a>
+<a href="https://www.qydion.com" target="_blank" rel="noopener"><img src="https://qydion.com/brand/16-horizontal-full-deepspace.png" alt="QYDION" width="240"></a>
 
 # ai-image-generator
 
@@ -9,8 +9,6 @@
 | Skill | Description |
 |---|---|
 | `image-generator` | Turns a user's brief description into a professional-grade image-generation prompt and drives the generation. Supports series illustrations, document-to-image, reference-based second-pass generation, outfit and background changes, and consistent or blended styles. |
-
-The skill itself: [`skills/image-generator/SKILL.md`](skills/image-generator/SKILL.md).
 
 ## Installation
 
