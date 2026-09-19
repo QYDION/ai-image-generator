@@ -1,7 +1,7 @@
 ---
 name: image-generator
 description: Generates a batch of stylistically consistent, professional-grade image series from documents, images, or text descriptions; also supports reference-based redrawing, outfit and hairstyle changes, background replacement, outpainting, local object replacement, style transfer, and sharpness refinement. Suited to series illustrations, multi-expression character sets, tutorial step images, top-down and flat-lay shots, diagrams and cutaway views, e-commerce hero images, poster key visuals, social-media grids, storyboards, and illustrations. Use when the user says "generate a set of images", "make series illustrations", "batch image generation", "produce N images", "turn this document into images", "a set of images in one consistent style", "multiple expression images of this character", "top-down view / diagram / step image", "generate at 70% style A + 30% style B", "change this image to X", "swap the background", or "extend the frame outward".
-version: 1.2.0
+version: 1.3.0
 license: MIT
 author: 盘锦奇点科技有限公司 (Panjin QYDION Technology Co., Ltd.)
 ---
@@ -73,7 +73,7 @@ The prompt is a single passage of natural language. When the characters that sho
 - Shorter text inside the quotes is more accurate. The model's ability to reproduce long sentences and multi-line typography is limited; anything longer than one line should become negative space, with typesetting handled in post.
 - Prefer straight ASCII double quotes `"` (they are more common in training corpora).
 
-Key text in an image (brand names, numbers, contact details) is high-precision content. After generation, verify each item by hand or recompose it in post — do not deliver it as-is (see §13).
+Key text in an image (brand names, numbers, contact details) is high-precision content. After generation, verify each item by hand or recompose it in post — do not deliver it as-is (see §14).
 
 ## 2. Scope
 **Not triggered by**: pure image engineering (precise cutouts, watermark removal, batch compression, format conversion, face anonymization), video generation, or 3D model generation. Every other natural-language image generation and editing request falls within scope.
@@ -84,10 +84,19 @@ Text, Markdown, images, and PDFs can be read directly. If the current environmen
 
 For long documents, extract the structure first (section headings, key conclusions, timeline) rather than placing the entire text in the prompt.
 
-### 3.2 Intent recognition and parameter completion
+### 3.2 Judge the style first
+
+Style judgement is **step one**. It happens before any parameter is chosen, and everything downstream follows from it.
+
+1. Read the user's wording and assign a style category per 4.4 — photographic / realistic rendering / drawing-and-rendering.
+2. That verdict settles, once and for all: whether photographic-only fields may appear (focal length, aperture, lens type, film stock), whether a render engine may be written (7.1), which skin mode applies (§6), and whether NPR or toon terms are the right lever.
+3. If the user blends styles, fix the ratio here as well (4.2). The ratio does not change later in the run.
+4. Only once the verdict is fixed do you move on to 3.3 and fill in parameters. **Never fill in a parameter first and justify the style afterwards** — that is exactly how non-photographic frames end up carrying lens parameters and engines they should not have.
+
+### 3.3 Intent recognition and parameter completion
 Establish first: the purpose and where the image will be placed, the behaviour the image should trigger, the subject of the frame, and the overall tone.
 
-**Judge the style category first (see 4.4), then decide which parameters to fill in.** "Realistic" is not the same as "photographic realism": illustrations, CG, and images can all be realistic, but only photographic styles may carry lens parameters.
+The style verdict is already fixed in 3.2; fill parameters against it, not the other way round. "Realistic" is not the same as "photographic realism": illustrations, CG, and images can all be realistic, but only photographic styles may carry lens parameters.
 
 Only the subject is mandatory. Everything else is written on demand, judged by the model — whatever the frame actually needs, no more. The items that may be added: shot size, camera position and angle, focal length and lens type, aperture, lighting plan (direction + quality), composition rule, colour and tonality, material and detail density, and reserved copy space. Focal length, lens type, and aperture are photographic-only fields — skip them entirely for every other style. Skin strategy, in-image text, and render engine are decided at this step as well. When information is missing, ask once in a single pass; aspect ratio is not part of the question.
 
@@ -122,12 +131,12 @@ A single feeling word usually lands on 3–4 dimensions at once (light quality, 
 
 Where a row's mapping involves camera or film terms (widescreen ratio, anamorphic, film grain), apply that part only when the style is photographic per 4.4; non-photographic styles take the light quality, colour temperature, saturation, and composition parts only.
 
-### 3.3 Plan table
+### 3.4 Plan table
 Output the table directly and proceed, **without blocking for confirmation**: `# / source or purpose / scene description / shot size / focal length and aperture / lighting / reference strength / notes (whether space is reserved for copy)`.
 
 The count follows user input; if the user does not specify, default to **1 image** and do not ask. Leave the focal-length-and-aperture column empty for non-photographic styles; the shot-size column is filled when the frame needs it.
 
-### 3.4 Generation and delivery
+### 3.5 Generation and delivery
 Before generating, build the task manifest and execute one by one, writing status back:
 
 | # | Scene description | Reference strength | Status | Output |
@@ -258,10 +267,16 @@ Empirical note: if cyberpunk or semi-realistic characters are wrongly set to Ret
 
 In both modes, lashes, lip texture, and individual hair strands are never over-smoothed. The English strings above are prompt text submitted verbatim to the model — copy them as they are.
 
-### 6.1 Only wanted content is written
-Write only what should appear in the frame. Anything that must not appear is simply not written: not as a negation ("no freckles", "no watermark"), and never named in any form at all. If it is not wanted, it is not written.
+### 6.1 Only wanted content is written — where unwanted content goes depends on the channel
 
-The reason is practical: a concrete noun that is named, even in order to be denied, becomes more likely to appear in the frame. Where the wanted result still does not appear, go to targeted second-pass refinement (see 6.2 and 10.4) rather than adding a negation.
+**The positive prompt writes only what should appear in the frame.** Where unwanted content goes is decided by the channel's schema, checked per 11.2:
+
+- **No negative-prompt field** → unwanted content is simply not written: not as a negation ("no freckles", "no watermark"), and never named in any form at all. If it is not wanted, it is not written.
+- **A negative-prompt field exists** → unwanted content is written there, in the negative prompt. It still stays out of the positive prompt entirely.
+
+The reason the positive prompt must stay clean either way is practical: a concrete noun named in the positive prompt, even in order to be denied, becomes more likely to appear in the frame. Putting it in the negative prompt is what makes naming it safe — that field exists precisely to be denied.
+
+Where the wanted result still does not appear even with a negative prompt, go to targeted second-pass refinement (see 6.2 and 10.4) rather than piling more exclusions on.
 
 This governs generation from scratch. In image-to-image, removing something is often the task itself: the user asks to take out text, a watermark, a logo, or clutter, or asks for a quality raise or a redraw. Those are written as the task and are not withheld by this rule (see §8).
 
@@ -360,7 +375,7 @@ The "Lens and camera" column: the camera position, viewpoint, and shot-size part
 | Diagrams, schematics | Isometric or front-on | No strong shadows, even brightness | Aligned elements, clear connectors | Consistent line weight and palette, negative space reserved for labels |
 | Cutaway, exploded view | Front-on or 45° isometric | Even soft light | Parts laid out along an axis at even spacing | State the number and arrangement of parts; avoid freely added parts |
 | Product hero, e-commerce | 50–85mm, f/5.6–8, subject ≥ 70% | Softbox with black flags on both sides to define form | Centred or rule of thirds | Clean edges, seamless background, true materials |
-| Poster KV, cover | Subject occupies most of the frame | Backlit silhouette or a strong colour-block background | Title area top and bottom | Most channels do not support native 16:9 or 9:16 (see 11.2) |
+| Poster KV, cover | Subject occupies most of the frame | Backlit silhouette or a strong colour-block background | Title area top and bottom | Most channels do not support native 16:9 or 9:16 (see 11.3) |
 | Social-media 3×3 grid | Single-image subject stands out | One colour grade across the set | Slightly above centre | Consistent colour system across the set; each image complete on its own |
 | Storyboard, shot breakdown | Wide → medium → close-up progression | Same light source | Keep the axis consistent between adjacent shots | Note the shot size and camera movement in each panel |
 | Illustration, picture book | One consistent medium and brushwork | Lighting logic inherent to the style | Generous negative space | The style string never changes across the set |
@@ -471,7 +486,18 @@ Never pass parameters the channel does not support.
 
 The prompt is submitted verbatim; do not accept channel rewriting (see 1.1).
 
-### 11.2 Aspect-ratio mapping
+### 11.2 Negative prompt — gated by the channel schema
+
+**A negative prompt is never written by default.** Before assembling the prompt, read the target channel's input schema through the tool metadata interface and check whether it exposes a negative-prompt field — commonly `negative_prompt` or `negative_prompt_2`; some channels name it differently but expose the same capability.
+
+- **The field exists** → write a negative prompt for that channel.
+- **The field does not exist** → write none. Do not smuggle "what must not appear" into the positive prompt as a negation (6.1). A channel with no such field simply gets no negative prompt; the wanted result is pursued through positive description and, if that is not enough, second-pass refinement (6.2 / 10.4).
+
+When one is written, it follows the same discipline as the positive prompt: concrete nouns, no padding, and nothing that contradicts what the positive prompt asks for. It is **never** used to carry a sensitive-wording rewrite — see 1.2.
+
+What belongs in it: the artifacts and failure modes this channel is prone to and this frame can actually suffer from — malformed hands, fused or extra fingers, extra limbs, garbled text, warped background geometry, duplicated tails or ears when a count was specified, over-smoothed plastic skin. Keep it short; do not list everything.
+
+### 11.3 Aspect-ratio mapping
 | User's wording | Orientation | Notes |
 |---|---|---|
 | Unspecified / square / 1:1 | Square | `1024x1024` |
@@ -481,10 +507,10 @@ The prompt is submitted verbatim; do not accept channel rewriting (see 1.1).
 
 The user's stated ratio carries the highest weight. An unsupported ratio must never be substituted silently; there are two paths: generate at the nearest ratio, or generate first and crop afterwards. Cropping consumes no extra credits.
 
-### 11.3 Output
+### 11.4 Output
 Output to `generated-images/<task-name>/` inside the workspace, with a short slug for the task name. Filenames are produced by the generation channel and are not renamed. For series images, keep the order clear. On delivery, present all images at once in manifest order.
 
-### 11.4 Credits
+### 11.5 Credits
 Before batch generation, state the number of images and the estimated consumption, **without blocking execution**. On resume, skip the images that already succeeded so credits are not spent twice.
 
 ## 12. Common Issues and Prevention
@@ -492,7 +518,7 @@ Before batch generation, state the number of images and the estimated consumptio
 |---|---|
 | Framing dragged into a bust shot by the reference image | Generate the anchor directly at the target shot size; do not produce a half-body first and hope to tighten it later |
 | Malformed hands | Keep hands out of prominent positions, have the subject hold something or place the hands at the edge, and write `natural anatomy` |
-| Freckles and coarse texture in a Retouched subject | Mount the positive skin string from §6 and name no unwanted feature at all; if that still fails, go to targeted second-pass refinement per 10.4 |
+| Freckles and coarse texture in a Retouched subject | Mount the positive skin string from §6; the positive prompt names no unwanted feature at all, and unwanted features go in the negative prompt when the channel exposes the field (6.1 / 11.2); if that still fails, go to targeted second-pass refinement per 10.4 |
 | Garbled text in the image | Decide language and content per 1.3, and verify key text by hand or composite it in post after generation |
 | Sensitive wording in the user's own prompt rewritten without asking | Keep it verbatim per 1.2 and flag it in the reply; the user decides what to do |
 | Tilted horizon or building verticals | Write `level horizon, vertical lines corrected` |
@@ -506,5 +532,19 @@ Before batch generation, state the number of images and the estimated consumptio
 | The user's own prompt being cut down | Polish only, never delete; remove only self-contradictory noise, and report each change |
 | One failed generation aborting the whole batch | Record the failure separately and continue; report partial completion at the end |
 
-## 13. Delivery Checklist
-Files on disk match the task manifest; aspect ratio matches what was agreed, and any unsupported ratio was stated in advance; image quality takes the user's specified value or the channel's highest tier; the style string is identical across the set and any blend ratio has been restated; the style verdict matches the parameters actually used (no focal length, aperture, lens type, or film stock in a non-photographic frame; shot size, camera position, and focus are not style-restricted); no element of a user-written prompt was cut, and every change was reported item by item; characters are consistent across images; no garbled text and no malformed limbs (text generated per 1.3 has been verified by hand); sensitive wording from the user's own prompt was kept verbatim and flagged in the reply rather than rewritten (see 1.2); colour temperature, colour tone, saturation, and contrast were written only if the user asked for them (see 10.2); sequence order is correct; the prompt was not rewritten by the channel.
+## 13. Prompt Validation
+
+Run the finished prompt through this check **before the generation call**. A failure caught here costs nothing; the same failure caught after generation costs credits.
+
+1. **Style verdict** — does the verdict from 3.2 match the parameters actually written? A drawing-and-rendering or illustration frame carrying focal length, aperture, lens type, or film stock fails. Shot size, camera position and angle, and focus and depth of field are framing language and are always allowed.
+2. **Engine** — at most one engine, and only where 7.1 allows it. Naming two fails.
+3. **Gated colour fields** — colour temperature, colour tone, saturation, and contrast appear only if the user asked for them (10.2); dominant, secondary, and accent colours only if the user asked for a palette or the set must stay consistent.
+4. **Writing rules (10.3)** — one continuous comma-separated passage, neither a bare keyword list nor a literary paragraph; the same thing is not written twice; nothing is in there merely because the list in 10.3 has an entry for it; the passage stops once the frame is clear.
+5. **Nothing cut** — every element of the user's own prompt is still present and every change is reported item by item (1.1); sensitive wording stays verbatim (1.2).
+6. **Hands and limbs** — where a person is in frame, a hand clause is present and `natural anatomy` is written (§12).
+7. **Negative prompt** — present only when the channel exposes the field (11.2), and never contradicting the positive prompt.
+
+Fix every failure inside the prompt, then proceed. If a failure cannot be fixed without cutting something the user wrote, stop and say so rather than cutting it silently.
+
+## 14. Delivery Checklist
+The prompt passed the validation in §13; files on disk match the task manifest; aspect ratio matches what was agreed, and any unsupported ratio was stated in advance; image quality takes the user's specified value or the channel's highest tier; the style string is identical across the set and any blend ratio has been restated; the style verdict matches the parameters actually used (no focal length, aperture, lens type, or film stock in a non-photographic frame; shot size, camera position, and focus are not style-restricted); no element of a user-written prompt was cut, and every change was reported item by item; characters are consistent across images; no garbled text and no malformed limbs (text generated per 1.3 has been verified by hand); sensitive wording from the user's own prompt was kept verbatim and flagged in the reply rather than rewritten (see 1.2); colour temperature, colour tone, saturation, and contrast were written only if the user asked for them (see 10.2); sequence order is correct; the prompt was not rewritten by the channel.
