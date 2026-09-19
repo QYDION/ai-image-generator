@@ -24,6 +24,8 @@ Download this repository and copy the entire `skills/image-generator` folder int
 
 Either way, just describe what you want in natural language afterwards — no special commands and no client-specific invocation format.
 
+> ⚠️ **After modifying or updating the skill, reload the full skill.** The skill body is long, and a client may inject only its opening portion on first load. If an incremental change never reaches the context in full, the old rules are still the ones being executed. Restart the session or explicitly reload after an update, so the latest version is read in full.
+
 ## Repository layout
 
 ```
